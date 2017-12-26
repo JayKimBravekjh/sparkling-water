@@ -1,0 +1,19 @@
+### Point SPARK_HOME to the existing installation of Spark and export variable MASTER.
+
+export SPARK_HOME="/path/to/spark/installation" 
+# To launch a local Spark cluster with 3 worker nodes with 2 cores and 1g per node.
+export MASTER="local[*]" 
+
+###  From your terminal, run:
+
+cd ~/Downloads
+unzip sparkling-water-2.2.5.zip
+cd sparkling-water-2.2.5
+bin/sparkling-shell --conf "spark.executor.memory=1g"
+
+###  Create an H2O cloud inside the Spark cluster:
+
+import org.apache.spark.h2o._
+val h2oContext = H2OContext.getOrCreate(spark) 
+import h2oContext._ 
+
